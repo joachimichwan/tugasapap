@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/datatables"></head>
+	<body>
+		<div th:replace="fragments/navigation"></div>
+		<div class="page-header text-center">
+			<h2 th:text="'Lihat Data Penduduk - ' + ${nkk}"></h2>
+		</div>
+		
+		<div class="container text-center">
+			<div class="row text-left">
+				<div class="col-sm-3"></div>
+				<div class="col-sm-3">
+			       	<h3 th:text="'Nomor' + ' ' + 'KK'">Nomor Kartu Keluarga</h3>
+			       	<h3 th:text="Alamat">Alamat Keluarga</h3>
+			       	<h3 th:text="'RT' + '/' + 'RW'">RT/RW Keluarga</h3>
+			       	<h3 th:text="'Kelurahan' + '/' + 'Desa'">Kelurahan Keluarga</h3>
+			       	<h3 th:text="kecamatan">Kecamatan Keluarga</h3>
+			       	<h3 th:text="'Kota' + '/' + 'Kabupaten'">Kota Penduduk</h3>	
+			       	<h3 th:text="'Status' + ' ' + 'KK'">Berlaku Kartu Keluarga</h3>				
+				</div>
+		       	<h3 th:text="${nkk}">Nomor Kartu Keluarga</h3>
+		       	<h3 th:text="${keluarga.alamat}">Alamat Keluarga</h3>
+		       	<h3 th:text="${keluarga.rt} + '/' + ${keluarga.rw}">RT/RW Keluarga</h3>
+		       	<h3 th:text="${keluarga.nama_kelurahan}">Kelurahan Keluarga</h3>
+		       	<h3 th:text="${keluarga.nama_kecamatan}">Kecamatan Keluarga</h3>
+		       	<h3 th:text="${keluarga.nama_kota}">Kota Penduduk</h3>
+		       	<h3 th:text="${keluarga.status}">Berlaku Kartu Keluarga</h3>
+		    </div>
+			<br />
+			<button class="btn btn-info" value="save">
+				<a th:href="@{'/keluarga/ubah/' + ${nkk}}" style="text-decoration:none; color:inherit">Update Keluarga</a>
+			</button>
+	       	<br /><br />
+	       	
+	       	<table id="anggota_keluarga_table" class="table table-striped table-responsive table-hover">
+		       <thead>
+		       		<tr>
+						<th class="text-center">No</th>
+						<th class="text-center">Nama</th>
+						<th class="text-center">NIK</th>
+						<th class="text-center">Jenis Kelamin</th>
+						<th class="text-center">Tempat Lahir</th>
+						<th class="text-center">Tanggal Lahir</th>
+						<th class="text-center">Agama</th>
+						<th class="text-center">Pekerjaan</th>
+						<th class="text-center">Status Perkawinan</th>
+						<th class="text-center">Status Dalam Keluarga</th>
+						<th class="text-center">Kewarganegaraan</th>
+						<th></th>
+						<th></th>				
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="anggota,iterationStatus: ${keluarga.anggota}">
+						<td th:text="${iterationStatus.count}">No</td>
+						<td th:text="${anggota.nama}">Nama Anggota Keluarga</td>
+						<td th:text="${anggota.nik}">NIK Anggota Keluarga</td>
+						<td th:text="${anggota.jk}">Jenis Kelamin Anggota Keluarga</td>
+						<td th:text="${anggota.tempat_lahir}">Tempat Lahir Anggota Keluarga</td>
+						<td th:text="${anggota.tanggal}">Tanggal Lahir Anggota Keluarga</td>
+						<td th:text="${anggota.agama}">Agama Anggota Keluarga</td>
+						<td th:text="${anggota.pekerjaan}">Pekerjaan Anggota Keluarga</td>
+						<td th:text="${anggota.status_perkawinan}">Status Anggota Keluarga</td>
+						<td th:text="${anggota.status_dalam_keluarga}">Status Dalam Keluarga Anggota Keluarga</td>
+						<td th:text="${anggota.kewarganegaraan}">Kewarganegaraan Anggota Keluarga</td>		
+						<td>
+							<form action="/penduduk/mati" method="post">
+								<div>
+									<input type="hidden" name="nik" th:value="${anggota.nik}" />	
+								</div>
+								<div>
+									<button class="btn btn-warning" type="submit" name="action" value="save">Nonaktifkan</button>
+								</div>
+							</form>
+						</td>
+						<td>
+							<button class="btn btn-info" value="save">
+								<a th:href="@{'/penduduk/ubah/' + ${anggota.nik}}" style="text-decoration:none; color:inherit">Update</a>
+							</button>
+						</td>	    
+					</tr>
+				</tbody>
+	       	</table>
+       	</div>
+       	<script>
+		    $(document).ready(function(){
+		        $('#anggota_keluarga_table').dataTable();
+		    });
+	   	</script>     	
+		<div th:replace="fragments/footer"></div>
+	</body>
+</html>

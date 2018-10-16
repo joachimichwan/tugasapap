@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/header"></head>
+	<body>
+		<div th:replace="fragments/navigation"></div>
+    	<div class="alert alert-danger text-center">
+			<strong><h2>Halaman Tidak Ditemukan</h2></strong>
+		</div>
+
+		<form action="/" method="post">
+			<div>
+				<button class="btn btn-info" type="submit" name="action" value="save">Kembali</button>
+			</div>
+		</form>
+		<div th:replace="fragments/footer"></div>
+    </body>
+</html>

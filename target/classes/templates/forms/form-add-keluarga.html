@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/header"></head>
+	<body>
+		<div th:replace="fragments/navigation"></div>
+		<div class="page-header text-center">
+			<h2>Tambah Keluarga</h2>
+		</div>
+	    
+		<div class="container">
+			<form th:action="'/keluarga/tambah/' + ${keluarga.nomor_kk}" method="post">
+				<div class="form-group">
+					<label for="alamat"> Nama </label> 
+					<input class="form-control" type="text" name="alamat" placeholder="Ex: Jalan Ir. Juanda No. 2"  required="true" />
+				</div>
+				<div class="form-group">
+					<label for="rt">RT</label>
+					<input class="form-control" type="text" name="rt" placeholder="Ex: 001"  required="true" />
+				</div>
+				<div class="form-group">
+					<label for="rw">RW</label>
+					<input class="form-control" type="text" name="rw" placeholder="Ex: 001"  required="true" />
+				</div>
+				<div class="form-group">
+					<label for="nama_kelurahan">Kelurahan/Desa</label>
+					<select class="form-control" name="id_kelurahan" required="true">
+					<div th:each="kelurahan,iterationStatus: ${kelurahan}">
+						<option th:value="${kelurahan.id}" th:text="${kelurahan.nama_kelurahan}"></option>
+					</div>			
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="nama_kecamatan">Kecamatan</label>
+					<select class="form-control" name="id_kecamatan" required="true">
+					<div th:each="kecamatan,iterationStatus: ${kecamatan}">
+						<option th:value="${kecamatan.id}" th:text="${kecamatan.nama_kecamatan}"></option>
+					</div>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="nama_kota">Kota</label>
+					<select class="form-control" name="id_kota" required="true">
+					<div th:each="kota,iterationStatus: ${kota}">
+						<option th:value="${kota.id}" th:text="${kota.nama_kota}"></option>
+					</div>
+					</select>
+				</div>
+				<div>
+					<button type="submit" name="action" value="save" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+		<div th:replace="fragments/footer"></div>
+	</body>
+</html>
+

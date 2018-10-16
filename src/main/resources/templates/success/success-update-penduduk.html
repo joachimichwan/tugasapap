@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragments/header"></head>
+	<body>
+		<div th:replace="fragments/navigation"></div>
+		<div class="alert alert-success text-center">
+			<strong><h2>Sukses!</h2></strong>
+			<h3 th:text="'Penduduk dengan nik ' + ${nik_lama} + ' berhasil diubah'">Tambah Penduduk</h3>
+		</div>
+		<form action="/" method="post">
+			<div>
+				<button class="btn btn-info" type="submit" name="action" value="save">Kembali</button>
+			</div>
+		</form>
+		<div th:replace="fragments/footer"></div>
+	</body>
+</html>
